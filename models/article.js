@@ -19,6 +19,9 @@ var ArticleSchema = new Schema({
   Author: {
     type:String
   },
+  Status:{
+  	type:Boolean
+  }
 
 });
 
@@ -26,7 +29,7 @@ var ArticleSchema = new Schema({
 // These ids are referred to in the Article model.
 
 // create the Note model with the NoteSchema
-var Article = mongoose.model('Article', NoteSchema);
+var Article = mongoose.model('Article', ArticleSchema);
 
 // export the Note model
 module.exports = Article;
