@@ -1,47 +1,11 @@
 <div class="container">
-	<div class="jumbotron text-center">
-		<h1>Latest Entrepeneneur Articles </h1>
-		<h2> The most recent Entrepreneur articles without paying entrpereneur</h2>
+{{!-- // braking div--}}
+	<div class="col-md-4"></div>
+	<div class="col-md-4 text-center">
+		<a href='/scrape'><button class="btn btn-danter text-center" method = "GET"><h4>Scrape</h4></button></a>
+		<hr>
+		<h5> Click to begin!</h5>
 	</div>
-	<div class="row">
-		<div class="col-md-3 col-md-offset-1 block" id = "notes">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-md-12">
-							<form action="/save" method="POST" role="form" style="display:block">
-								<div class="form-group">
-									<input type="text" name="comment" id="comment" tabindex="1" class="form-control" placeholder="" value="">
-								</div>
-								<div class="form-group">
-               		<button> Enter</button>
-                </div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div><!--Close Panel -->
-		</div>
-		<div class="col-md-4 panel" id ='articles'>
-			Main div dispays article information  
-		</div>
-		<div class="col-md-3">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-md-12">
-							<form action="/delete" method="POST" role="form" style="display:block">
-								<div class="form-group">
-								Placeholder display info in mongo
-									
-								</div>
-								<div class="form-group">
-	             		<button> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-	              </div>
-							</form>
-						</div>
-					</div>
-				</div>		
-			</div>
-		</div><!--Close col-md-3-->
+		
+
 </div>

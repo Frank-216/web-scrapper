@@ -1,0 +1,22 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8" id ='articles'>
+			<div class="panel">
+				<div class="panel-body">
+					<br/>
+					{{#each data}}
+					<div class="col-md-4" value = "{{this._id}}">
+					{{!-- Add a different font color for titke & Description --}}
+						<h4>{{this.title}}</h4>
+						<h5>{{this.description}}</h5>
+						<a href="{{this.link}}"><h6>Link</h6></a>
+						<a href="/articles/{{this._id}}"><button class="btn btn-danger"> More Details</button></a>
+						<hr>
+					</div>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</div><!--Close Row-->
+</div>
