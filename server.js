@@ -98,7 +98,7 @@ app.get('/scrape', function(req, res) {
 // this will get the articles we scraped from the mongoDB
 app.get('/articles', function(req, res){
 	// grab every doc in the Articles array
-	Article.find({}).limit(8).exec(function(err, doc){
+	Article.find({}).limit(10).exec(function(err, doc){
 		// log any errors
 		if (err){
 			console.log(err);
@@ -117,7 +117,7 @@ app.get('/articles', function(req, res){
 app.get('/articles/:id', function(req, res){
 	// using the id passed in the id parameter, 
 	// prepare a query that finds the matching one in our db...
-	Article.findOne({'_id': req.params.id})
+	Article.findOne({'_id': req.params.id}).limit(1)
 	// and populate all of the notes associated with it.
 	// .populate('note')
 	// now, execute our query
@@ -128,23 +128,40 @@ app.get('/articles/:id', function(req, res){
 		} 
 		// otherwise, send the doc to the browser as a json object
 		else {
-			console.log(doc);
+			// res.JSON(data);
+			console.log(true);
 			res.render("single",{
 				data:doc
-			})
+			});
 		}
 	});
 });
 
+app.get("/single", function(req,res){
+	console.log(false);
+	console.log(req.doc);
+})
+// app.get("/save",function(req,res){
 
+// 	var newNote = new Note (req.body)
+// 	Article.populate('note').exec(function(err,data){
+// 		if(err){
+// 			console.log(err);
+// 		}else{
+// 			res.json(data);
+// 		}
+// 	})
+// })
 // replace the existing note of an article with a new one
-// or if no note exists for an article, make the posted note it's note.
-app.post('/articles/:id', function(req, res){
+// // or if no note exists for an article, make the posted note it's note.
+app.post('/save', function(req, res){
 	// create a new note and pass the req.body to the entry.
-	var newNote = new Note(req.body);
-
+	console.log(req.body);
+	var newNote = {};
+	newNote.comments = req.body;
+	var item = new Note(newNote);	
 	// and save the new note the db
-	newNote.save(function(err, doc){
+	item.save(function(err, doc){
 		// log any errors
 		if(err){
 			console.log(err);
@@ -162,7 +179,7 @@ app.post('/articles/:id', function(req, res){
 					console.log(err);
 				} else {
 					// or send the document to the browser
-					res.send(doc);
+					res.json(doc);
 				}
 			});
 		}
