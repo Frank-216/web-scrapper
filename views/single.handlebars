@@ -1,17 +1,17 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-1"></div>
-		{{#each data}}
+		 
 		<div class="col-md-3 block" class="items">
 			
-				<h2>Title {{this.title}}</h2>
-				<h4>Description{{this.description}}</h4>
-				<a href="{{this.link}}"><h4>link</h4></a>
+				<h2>Title {{data.title}}</h2>
+				<h4>Description{{data.description}}</h4>
+				<a href="{{data.link}}"><h4>link</h4></a>
 				<hr>
 				<h4> Enter comments!</h4>
 				<form action="/save" method="POST" id="savenote" role="form" style="display:block">
 					<div class="form-group">
-						<input type="text" name="comment" data= "{{this._id}}"tabindex="1" class="form-control" placeholder="Comment" value="">
+						<input type="text" name="comment" data= "{{data._id}}"tabindex="1" class="form-control" placeholder="Comment" value="">
 					</div>
 					<div class="form-group">
          		<button id = "notes"> Enter</button>
@@ -21,21 +21,17 @@
 		<div class="col-md-2">
 			<div class="panel panel-default comments">
 			<div class="row">
-			<div class="col-md-12">
-				<h4>Comments </h4>
-				<hr>
-				<form action="/delete" method="POST" role="form" style="display:block">
-					<div class="form-group">
-		       		<button> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-		      </div>
-      	</form>
-			</div>
-			
-			</div>
-				
+				<div class="col-md-12">
+					<h4>Comments </h4>
+					<hr>
+					<form action="/delete" method="POST" role="form" style="display:block">
+						<div class="form-group">
+			       		<button> <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+			      </div>
+	      	</form>
+				</div>
+			</div>	
 			</div>
 		</div>
-
 	</div>
-		{{/each}}
 </div>

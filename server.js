@@ -13,6 +13,8 @@ var exphbs = require('express-handlebars');
 var request = require('request'); 
 var cheerio = require('cheerio');
 
+var PORT = process.env.PORT || 3000;
+
 // use morgan and bodyparser with our app
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
@@ -129,6 +131,7 @@ app.get('/articles/:id', function(req, res){
 		// otherwise, send the doc to the browser as a json object
 		else {
 			// res.JSON(data);
+			console.log(doc);
 			console.log(true);
 			res.render("single",{
 				data:doc
@@ -193,6 +196,6 @@ app.post('/save', function(req, res){
 
 
 // listen on port 3000
-app.listen(3000, function() {
+app.listen(PORT, function() {
   console.log('App running on port 3000!');
 });
