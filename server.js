@@ -44,8 +44,8 @@ db.once('open', function() {
 });
 
 // And we bring in our Note and Article models
-var Article = require('./models/article.js');
-var Note = require('./models/Notes.js');
+var Article = require('./models/Article.js');
+var Note = require('./models/notes.js');
 // Routes
 // ======
 
@@ -70,13 +70,11 @@ app.get('/scrape', function(req, res) {
 		result.title = $(element).find('h3').find('a').text();
 		result.link = "https://www.entrepreneur.com/" + $(element).find('h3').find('a').attr('href');
 		result.description = $(element).find(".deck").text();
-		author = $(element).find('.byline').find('a').text();
-		result.status = true;
-
-		var entry = Article(result);
+		result.author = $(element).find('.byline').find('a').text();
+		console.log(result);
+		var entry = new Article(result);
 		// going into article and checking if title exists.  if title exists we do not add it if it does not exist we add it. 
-		var check = Article.findOne({title:result.title});
-		if(check === null){
+
 		entry.save(function(err, doc) {
 			// log any errors
 			  if (err) {
@@ -88,11 +86,9 @@ app.get('/scrape', function(req, res) {
 			    console.log(doc);
 			  }
 			});
-		}else(
-			console.log("value not added. Already exists. ")
-			)
 		});
 	});
+
   // tell the browser that we finished scraping the text.
   res.redirect("articles");
 });
@@ -100,13 +96,14 @@ app.get('/scrape', function(req, res) {
 // this will get the articles we scraped from the mongoDB
 app.get('/articles', function(req, res){
 	// grab every doc in the Articles array
-	Article.find({}).limit(10).exec(function(err, doc){
+	Article.find({}).limit(10).sort({dateAdded:-1}).exec(function(err, doc){
 		// log any errors
 		if (err){
 			console.log(err);
 		} 
 		// or send the doc to the browser as a json object
 		else {
+			console.log(doc);
 			res.render("articles",{
 				data:doc
 			})

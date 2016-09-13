@@ -21,6 +21,9 @@ var ArticleSchema = new Schema({
   },
   Status:{
   	type:Boolean
+  },
+   dateAdded:{
+    type:Date
   }
 
 });
